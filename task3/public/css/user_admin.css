@@ -1,0 +1,70 @@
+.admin__top,
+.admin__bottom {
+    background-color: #fff;
+    padding: 20px;
+    font-family: "Roboto", sans-serif;
+    margin-bottom: 50px;
+}
+
+.admin__top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.category_list-item,
+.status_list-item {
+    display: flex;
+    align-items: center;
+}
+
+.category_list-item i,
+.status_list-item i {
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.new-category-wrapper i,
+.new-status-wrapper i {
+    cursor: pointer;
+}
+
+.new-category-wrapper input,
+.new-status-wrapper input {
+    box-shadow: 0 0 0 1px #659DBD;
+    width: 250px;
+}
+
+.user_list-item {
+    border-radius: 8px;
+    padding: 2px 6px;
+    border: 1px solid gray;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.categoryName,
+.statusName {
+    width: 100px;
+    margin-right: 20px;
+}
+
+.user-status {
+    width: 200px;
+    margin-left: 20px;
+}
+
+.grid-top {
+    display: grid;
+    grid-template-columns: 150px 150px 150px;
+}
+
+.status_list-item {
+    display: grid;
+    grid-template-columns: 150px 150px 150px;
+}
+
+#statuses_list {
+    padding-left: 0;
+}

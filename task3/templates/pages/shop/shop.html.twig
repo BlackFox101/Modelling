@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/shop.css') }}">
+{% endblock %}
+
+{% block title %}{{ shop.name }}{% endblock %}
+
+{% block body %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <input type="hidden" value={{ app.user.UserId == shop.getUser.UserId }} />
+        <input id="shop-id-input" type="hidden" value={{ shop.id }} />
+    {% endif %}
+    <input id="shop-id-input" type="hidden" value={{ shop.id }} />
+    <div class="shop-container">
+        <div class="shop-info-container">
+            <div class="shop-image">
+                <img src="{{ shop.pathToImage }}"  alt="shop_image"/>
+            </div>
+            <div class="shop-info-container_top">
+                <div class="admin-shop">
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        {% if app.user.userId == shop.getUser.userId %}
+                            <input class="input-flex title-editor" placeholder='Введите название магазина...' />
+                            <div class="hidden_for_title_editor">{{ shop.name }}</div>
+                        {% else %}
+                            <h1>{{ shop.name }}</h1>
+                        {% endif %}
+
+                    {% else %}
+                        <h1>{{ shop.name }}</h1>
+                    {% endif %}
+                </div>
+
+                <div class="shop-info">
+                    <div>{{ shop.createdAt.format('j F Y') }}</div>
+                    {#<div>Нравится: 0</div>#}
+                </div>
+                <div class="shop-user-info">
+                    <div class="shop-user-info__name">{{ shop.user.name }}</div>
+                    <div>Номер: {{ shop.user.phone }}</div>
+                </div>
+                <div>
+                    <div class="shop-about-shop">О магазине</div>
+                    <div class="shop-description">
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            {% if app.user.userId == shop.getUser.userId %}
+                                <textarea class="input-flex description_editor" placeholder='Введите описание магазина...'></textarea>
+                                <div class="hidden_for_description_editor">{{ shop.description }}</div>
+                            {% else %}
+                                {{ shop.description }}
+                            {% endif %}
+                        {% else %}
+                            {{ shop.description }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="shop-items-container">
+            <div class="items__search-field">
+                <input class="items__search-input" type="text" />
+                <button type="button" class="find-button">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="shop-items__top">
+                <div class="shop-items-header">Товары:</div>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') and app.user.userId == shop.getUser.userId  %}
+                    <a href={{ path('create_shop_item', {'shopId': shop.id}) }}>
+                        <i class="fas fa-plus shop-items-add" title="Добавить товар"></i>
+                    </a>
+                {% endif %}
+            </div>
+            {% for product in shop.products %}
+                <div class="shop-item" id="product-{{ product.productId }}">
+                    <div class="item-image">
+                        <img src="{{ product.pathToImage }}" alt="image_item">
+                    </div>
+                    <div class="shop-item-info" id={{ product.productId }}>
+                        <div>
+                            <div class="shop-item-title">{{ product.name }}</div>
+                            <div class="shop-item-description">{{ product.description }}</div>
+                            <div class="shop-item-price">{{ product.price }} ₽</div>
+                            <div class="shop-item-price">{{ product.category.name }}</div>
+                        </div>
+                        <div id={{ product.productId }}>
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                {% if app.user.userId == shop.getUser.userId %}
+                                    {{ product.countUserWhoAddedToFavourites }}
+                                    <i style="margin-left: 10px" data-type="delete" class="far fa-trash-alt" title="Удалить товар"></i>
+                                {% else %}
+                                    <div style="margin-left: 10px" class="star-icon-wrapper">
+                                        {% if product.isUserAddedInFavourites(app.user) %}
+                                            <i data-type="star" class="fas fa-star"></i>
+                                        {% else %}
+                                            <i style="margin-left: 10px" data-type="star" class="far fa-star"></i>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') and app.user.userId == shop.getUser.userId %}
+                        <a class="settings_link" href="{{ path('edit_shop_item', {'productId': product.productId}) }}">
+                            <i class="fa fa-cog settings" aria-hidden="true"></i>
+                        </a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/shop.js') }}">
+{% endblock %}

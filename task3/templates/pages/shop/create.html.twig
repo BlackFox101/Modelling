@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Создать магазин{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/create_shop.css') }}">
+{% endblock %}
+
+{% form_theme shopForm 'bootstrap_5_layout.html.twig' %}
+
+{% block body %}
+    <input id="user-id-input" type="hidden" value={{ app.user.getUserId }} />
+    <div class="create_shop_form">
+        <h1 class="h3 mb-3 font-weight-normal form-header">Создать магазин</h1>
+        {{ form(shopForm ) }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/create_shop.js') }}">
+{% endblock %}

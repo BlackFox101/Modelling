@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Создать товар{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/create_item.css') }}">
+{% endblock %}
+
+{% form_theme productForm 'bootstrap_5_layout.html.twig' %}
+
+{% block body %}
+    <div class="create_item_form">
+        <h1 class="h3 mb-3 font-weight-normal form-header">Создать товар</h1>
+        {{ form(productForm ) }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/create_item.js') }}">
+{% endblock %}

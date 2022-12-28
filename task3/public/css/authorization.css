@@ -1,0 +1,53 @@
+.registration-form, .login-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 100px auto 0 auto;
+    box-shadow: 0 0.0625rem 0.25rem 0 rgb(0 0 0);
+    padding: 30px;
+    border-radius: 5px;
+    max-width: 500px;
+}
+
+.login-form {
+    max-width: 400px;
+}
+
+.registration-form button, .login-form button {
+    margin-top: 15px;
+    width: 100%;
+    font-size: 1.3rem;
+}
+
+form div {
+    max-width: 400px;
+}
+
+.badge {
+    color: #dc3545 !important;
+}
+
+a.link {
+    color: #0d6efd;
+}
+
+.form-header, .auth_form-extra, form div {
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-top: 15px;
+}
+
+.auth_form-extra {
+    display: flex;
+    margin-top: 20px;
+}
+
+.auth_form-extra div {
+    margin-right: 10px;
+}
+
+.login-form .checkbox {
+    margin-top: 20px;
+}
