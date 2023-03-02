@@ -58,7 +58,7 @@ function App() {
                         const link = `${API_URL}/${value.shortLink}`;
                         return (
                             <li>
-                                <a id={id} href={link}>{link}</a>
+                                <a className={link} id={id} href={link}>{link}</a>
                                 <button onClick={() => deleteUrl(id)}>Delete</button>
                             </li>
                         )}

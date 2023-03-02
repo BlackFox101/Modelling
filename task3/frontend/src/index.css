@@ -18,3 +18,11 @@ input.invalid {
   outline: 2px solid red;
   border-radius: 5px;
 }
+
+ul {
+  padding-top: 20px;
+}
+
+a {
+  padding-right: 10px;
+}
