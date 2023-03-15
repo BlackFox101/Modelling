@@ -3,11 +3,14 @@ const cors = require('cors');
 const mongoose = require("mongoose");
 const port = 3001;
 const routes = require("./routes");
+require('dotenv').config();
+
+const MONGO_DB_URL = process.env.MONGO_DB_URL;
 
 main().catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect("mongodb://mongo:27017/db", {
+  await mongoose.connect(MONGO_DB_URL, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
   });
